@@ -11,7 +11,7 @@ public class DemoApplication {
 
     @RequestMapping("/")
     public String home() {
-        return "Hello World from Spring Boot! This web page is deployed through CI CD Jenkins Server";
+        return "I'm Learning DevOps. I will deploy my own application through CI CD pipeline";
     }
 
     public static void main(String[] args) {
