@@ -8,28 +8,22 @@ stage ( 'Cloning Private Git Repo'){
           }
 stage ('Building Ware File'){
   steps {
+   dir('/var/lib/jenkins/workspace/ff/Spring-Boot-Application-Practice/') {      
    sh 'mvn clean package'
 }
 }
-
+}
 stage ('Docker Image Build'){
 steps {
-
+dir('/var/lib/jenkins/workspace/ff/Spring-Boot-Application-Practice/'){
   sh 'docker build -t venkaiahk/cicd-springapp:v1 .'
-}
-}
-stage ('Pushing Docker Image to the Docker registry'){
-  steps {
-withCredentials([string(credentialsId: 'cd398dc0-ea30-48e3-a5ad-47e972b9a708', variable: 'docker pwd')]) {
-sh 'docker push -u venkaiahk -p ${docker pwd}'
-sh 'docker rmi venkaiahk/cicd-springapp:v1'
 }
 }
 }
 stage ('Creating Docker Container') {
 steps {
-sh 'docker run -dt -p 8081:8080 venkaiahk/cicd-springapp:v1
+sh 'docker run -dt -p 8082:8080 venkaiahk/cicd-springapp:v1'
 }
+
 }
-}
-       }
+}       }
