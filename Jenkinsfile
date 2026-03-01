@@ -1,16 +1,14 @@
 pipeline{
   agent any
 stages{
-
 stage ( 'Cloning Private Git Repo'){
   steps {
    git branch: 'main', url: 'https://github.com/practicebaladebitcardaws-ops/Private-Repo' 
         }
-                                   }
+          }
 stage ('Building Ware File'){
   steps {
    sh 'mvn clean package'
-
 }
 }
 
@@ -27,12 +25,11 @@ sh 'docker push -u venkaiahk -p ${docker pwd}'
 sh 'docker rmi venkaiahk/cicd-springapp:v1'
 }
 }
+}
 stage ('Creating Docker Container') {
 steps {
 sh 'docker run -dt -p 8081:8080 venkaiahk/cicd-springapp:v1
 }
 }
-
-
 }
        }
